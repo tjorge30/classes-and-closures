@@ -30,6 +30,21 @@
 */
 
 //Code Here
+class Employee {
+  constructor(first_name, last_name, email, age) {
+    this.first_name = first_name;
+    this.last_name = last_name;
+    this.email = email;
+    this.age = age;
+  }
+
+  makeWidget() {
+    let message = this.first_name + ' ' + this.last_name + ' Widget';
+    return message;
+  }
+}
+const person1 = new Employee ('Dallin', 'Anderson', 'da@example.com', 35);
+console.log(person1.makeWidget());
 
 
 ////////// PROBLEM 2 //////////
@@ -48,8 +63,25 @@
 */
 
 //Code Here
+class Manager extends Employee {
+  constructor(first_name, last_name, email, age) {
+    super(first_name, last_name, email, age);
+    this.reports = [];
+  }
 
+  hire(employee) {
+   this.reports.push(employee);
+   console.log(this.reports)
+  }
 
+  fire(index) {
+    this.reports.splice(index, 1);
+  }
+
+}
+
+ const manager1 = new Manager('Jane', 'Jones', 'jj@example.com', 22);
+ console.log(manager1); 
 ////////// PROBLEM 3 //////////
 
 /*
@@ -72,7 +104,54 @@
 */
 
 //Code Here
+class ProgressiveManager extends Manager {
+  constructor(first, last, email, age,){
+    super(first, last, email, age);
+    this.title = 'Not a manager';
+    this.bonus = 0;
+  }
 
+  updateTitle(){
+    console.log(this.reports.length)
+    let numOfReports = this.reports.length;
+     switch(numOfReports) {
+       case numOfReports >= 1 && numOfReports <= 3:
+        return this.title = 'Barely Manager';
+       break;
+       case numOfReports >= 4 && numOfReports <= 10:
+        return this.title = 'Mostly Manager';
+       break;
+       case numOfReports >= 11 && numOfReports <= 50:
+        return this.title = 'Manager';
+       break;
+       case numOfReports >= 51 && numOfReports <= 100:
+        return this.title = 'Manager Plus';
+       break;
+       case numOfReports >= 101:
+        return this.title = 'Bestest Manager';
+       break;
+       default:
+        return this.title = 'Not a manager'
+     }
+  }
+
+  updateBonus() {
+    super.fire(index);
+    let bounusCount = [];
+    bounusCount.push(index);
+    bounusCount.forEach(element => {
+      this.bonus = this.bonus + 100;
+      return this.bonus
+     });
+    
+  }
+}
+
+const example1 = new ProgressiveManager('Julie', 'Ford', 'jf@example.com', 42);
+example1.hire('Dallin');
+example1.hire('Mike');
+example1.hire('James');
+example1.fire(1);
 
 
 ////////// PROBLEM 4 - Black Diamond //////////
